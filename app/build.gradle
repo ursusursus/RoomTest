@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion compileSdk
+    buildToolsVersion buildTools
+
+    defaultConfig {
+        applicationId "eu.activstar.ursus.myapplication"
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+//    testOptions {
+//        unitTests {
+//            includeAndroidResources = true
+//        }
+//    }
+}
+
+dependencies {
+    implementation "android.arch.paging:runtime:1.0.0"
+    implementation "android.arch.persistence.room:rxjava2:1.1.0"
+    implementation "android.arch.persistence.room:runtime:1.1.0"
+    kapt "android.arch.persistence.room:compiler:1.1.0"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    implementation "com.google.dagger:dagger:$common_dep_versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$common_dep_versions.dagger"
+
+    implementation("com.crashlytics.sdk.android:crashlytics:$common_dep_versions.crashlytics@aar") {
+        transitive = true;
+    }
+
+    implementation "com.squareup.okhttp3:okhttp:$common_dep_versions.okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$common_dep_versions.okhttp"
+
+    implementation "com.squareup.retrofit2:retrofit:$common_dep_versions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$common_dep_versions.retrofit"
+
+    implementation "se.ansman.kotshi:api:$common_dep_versions.kotshi"
+    kapt "se.ansman.kotshi:compiler:$common_dep_versions.kotshi"
+    implementation "com.squareup.moshi:moshi:$common_dep_versions.moshi"
+    implementation "com.squareup.retrofit2:converter-moshi:$common_dep_versions.retrofit"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
+    implementation "com.jakewharton.rxbinding2:rxbinding:2.1.1"
+    implementation "com.jakewharton.rxrelay2:rxrelay:2.0.0"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+
+    implementation "com.github.bumptech.glide:glide:$common_dep_versions.glide"
+    kapt "com.github.bumptech.glide:compiler:$common_dep_versions.glide"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$common_dep_versions.glide@aar"
+
+    implementation "com.android.support:appcompat-v7:$common_dep_versions.appcompat"
+    implementation "com.android.support:recyclerview-v7:$common_dep_versions.appcompat"
+    implementation "com.android.support:customtabs:$common_dep_versions.appcompat"
+    implementation "com.android.support:design:$common_dep_versions.appcompat"
+    implementation "com.android.support:cardview-v7:$common_dep_versions.appcompat"
+
+    testImplementation "junit:junit:$common_dep_versions.junit"
+    testImplementation "org.mockito:mockito-core:$common_dep_versions.mockito"
+//    testImplementation "org.robolectric:robolectric:3.8"
+    androidTestImplementation "org.mockito:mockito-core:$common_dep_versions.mockito"
+    androidTestImplementation "junit:junit:$common_dep_versions.junit"
+    androidTestImplementation "com.android.support.test:runner:1.0.1"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.1"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+}
